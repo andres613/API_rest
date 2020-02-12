@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -40,6 +41,7 @@ public class Person implements Serializable {
 	String name;
 	@NotEmpty(message = "Por favor, ingrese un correo electrónico")
 	@Email(message = "El formato del e-mail es incorrecto")
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	String email;
 	@Positive(message = "La edad debe ser mayor a cero (0)")
 	int age;
