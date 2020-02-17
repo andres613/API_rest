@@ -1,0 +1,11 @@
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/entitydto/Person.java
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/zconsumeApi/Person.java
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/service/PersonService.java
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/zvalidator/PersonDataValidator.java
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/controller/PersonController.java
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/zvalidator/DataPerson.java
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/zconsumeApi/Start.java
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/controller/CustomGlobalExceptionHandler.java
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/repositorydao/PersonRepository.java
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/ApiRestApplication.java
+/home/archlinux/Public/Desarrollo/workspace-spring-tool-suite/API_rest/src/main/java/com/apicompany/api/zconsumeApi/RequestService.java

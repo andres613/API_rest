@@ -13,7 +13,7 @@ public class RequestService {
 	
 	public void captureData () throws MalformedURLException, IOException {
 		
-		String url = "http://localhost:8080/api_rest/api/person/";
+		String url = "http://localhost:9898/api_rest/api/person/";
 		//String url = "http://api.thecatapi.com/v1/images/search";
 		String reply = 
 				new Scanner(			// A new scanner is created

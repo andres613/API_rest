@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.apicompany.api.entitydto.Person;
-import com.apicompany.api.repositorydao.PersonRepository;
+import com.apicompany.api.entity.Person;
+import com.apicompany.api.repository.PersonRepository;
 /**
  * La anotación o estereotipo «@Service» indica a Spring que cree una instancia de esta clase (bean)
  * que se podrá usar en otras instancias
@@ -23,6 +23,8 @@ public class PersonService {
 	 * por ende se actualiza la entidad. 
 	 */
 	public Person save(Person person) {
+		
+		
 		return personRepository.save(person);
 	}
 	
