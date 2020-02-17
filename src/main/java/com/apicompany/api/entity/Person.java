@@ -50,8 +50,8 @@ public class Person {
 
 	@NotEmpty(message = "Por favor, ingrese un número de identificación")
 	@Size(min = 6, max = 10, message = "Número de identificación no válido")
-	@Column(name = "person_id")
-	String person_id;
+	@Column(name = "personid")
+	String personid;
 
 	@NotEmpty(message = "Por favor, ingrese un nombre")
 	@Size(min = 3, max = 10, message = "Tamaño de nombre incorrecto")
@@ -81,9 +81,9 @@ public class Person {
 	public Person() {
 	}
 
-	public Person(Long id, String person_id, String name, String email, int age) {
+	public Person(Long id, String personid, String name, String email, int age) {
 		this.id = id;
-		this.person_id = person_id;
+		this.personid = personid;
 		this.name = name;
 		this.email = email;
 		this.age = age;
@@ -97,10 +97,10 @@ public class Person {
 	}
 
 	public String getPersonId() {
-		return person_id;
+		return personid;
 	}
-	public void setPersonId(String person_id) {
-		this.person_id = person_id;
+	public void setPersonId(String personid) {
+		this.personid = personid;
 	}
 
 	public String getName() {

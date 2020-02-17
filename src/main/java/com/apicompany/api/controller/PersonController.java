@@ -1,6 +1,7 @@
 // Interfaz de servicios
 package com.apicompany.api.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.apicompany.api.dto.PersonDTO;
 import com.apicompany.api.entity.Person;
 import com.apicompany.api.service.PersonService;
 /**
@@ -48,23 +50,24 @@ public class PersonController {
 	 * Fijarse en la anotación << @RequestBody >> antes de la variable «person». Esta anotación indica que la variable
 	 * debe ser creada con los valores que lleguen en el cuerpo de la petición HTTP,
 	 * para lo cual se usa una estructura JSON
+	 * @throws ParseException 
 	 */
 	// Se le indica el verbo que corresponde al método
 	@PostMapping("/post")
-	public void save(@Valid @RequestBody Person person) {
-		personService.save(person);
+	public void save(@Valid @RequestBody PersonDTO persondto) throws ParseException {
+		personService.save(persondto);
+	}
+	
+	@GetMapping("/getByPersonid")
+	public PersonDTO getByPerson_id(@Valid @RequestParam String personid) {
+		return personService.findByPersonid(personid);
 	}
 	
 	@GetMapping
 	public List<Person> getAll() {
 		return personService.findAll();
 	}
-	
-	@GetMapping("/getById")
-	public Person getById(@Valid @RequestParam Long id) {
-		return personService.findById(id);
-	}
-	
+	/*
 	@GetMapping("/getByName")
 	public Person getByName(@Valid @RequestParam String name) {
 		return personService.findByName(name);
@@ -72,19 +75,20 @@ public class PersonController {
 	
 //	@PutMapping("/putById")
 	public void update(@Valid @RequestParam Long id, @Valid @RequestBody Person person) {
+		/*
 		Person oldPerson = personService.findById(id);
 		oldPerson.setName(person.getName());
 		oldPerson.setName(person.getName());
 		oldPerson.setEmail(person.getEmail());
 		oldPerson.setAge(person.getAge());
-		personService.save(oldPerson);
+		//personService.save(oldPerson);
 	}
 	
 	@DeleteMapping("/deleteById")
 	public void delete(@Valid @RequestParam Long id) {
 		personService.delete(id);
 	}
-	
+	*/
 	
 
 }

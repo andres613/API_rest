@@ -9,4 +9,6 @@ public interface PersonRepository extends JpaRepository<Person, Long>{
 	
 	// Este método es agregado debido a que entre los compotamientos definidos por defecto no se encuentra
 	public Person findByName(String name);
+	
+	public Person findByPersonid(String personid);
 }

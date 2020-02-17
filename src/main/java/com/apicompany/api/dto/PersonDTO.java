@@ -1,25 +1,25 @@
 package com.apicompany.api.dto;
 
 public class PersonDTO {
-	String person_id;
+	String personid;
 	String name;
 	String email;
 	int age;
 
-	public PersonDTO(String person_id, String name, String email, int age) {
-		super();
-		this.person_id = person_id;
+	public PersonDTO(String personid, String name, String email, int age) {
+		//super();
+		this.personid = personid;
 		this.name = name;
 		this.email = email;
 		this.age = age;
 	}
 
-	public String getPerson_id() {
-		return person_id;
+	public String getPersonid() {
+		return personid;
 	}
 
-	public void setPerson_id(String person_id) {
-		this.person_id = person_id;
+	public void setPersonid(String personid) {
+		this.personid = personid;
 	}
 
 	public String getName() {
