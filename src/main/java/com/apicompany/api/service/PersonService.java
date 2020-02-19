@@ -1,6 +1,7 @@
 package com.apicompany.api.service;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -31,33 +32,54 @@ public class PersonService {
 	
 	public void save(PersonDTO persondto) throws ParseException {
 		Person person = dtoToEntity(persondto);
-		//System.out.println("{id:"+person.getPersonId()+", name:"+person.getName()+", email:"+person.getEmail()+", age:"+person.getAge()+"}");
 		personRepository.save(person);
 	}
 	
-	public PersonDTO findByPersonid(String personid) {
-		return entityToDto(personRepository.findByPersonid(personid));
+	public List<PersonDTO> findAll(){
+		return listEntityToDto(personRepository.findAll());
 	}
 	
-	public List<Person> findAll(){
-		return personRepository.findAll();
-	}
-	/*
-	public Person findByName(String name) {
-		return personRepository.findByName(name);
+	public PersonDTO findById(String id) {
+		return entityToDto(personRepository.findById(id).get());
 	}
 	
-	public void delete(Long id) {
+	public PersonDTO findByPersonid(String document) {
+		return entityToDto(personRepository.findByDocument(document));
+	}
+	
+	public List<PersonDTO> findByName(String name) {
+		return listEntityToDto(personRepository.findByName(name));
+	}
+	
+	public void delete(String id) {
 		personRepository.deleteById(id);
 	}
-	*/
+	
+	
 	private Person dtoToEntity(PersonDTO persondto) throws ParseException {
 		return modelMapper.map(persondto, Person.class);
 	}
 	
 	private PersonDTO entityToDto (Person person) {
-		return modelMapper.map(person, PersonDTO.class);
+		if (person != null) {
+			PersonDTO dto = new PersonDTO("", null, null, null, 0);
+			dto.setId(person.getId());
+			dto.setDocument(person.getDocument());
+			dto.setName(person.getName());
+			dto.setEmail(person.getEmail());
+			dto.setAge(person.getAge());
+			return dto;
+		} else {
+			return null;
+		}
 	}
 	
+	private List<PersonDTO> listEntityToDto (List<Person> people) {
+		List<PersonDTO> persondtos = new ArrayList<PersonDTO>();
+		for (Person person : people) {
+			persondtos.add(entityToDto(person));
+		}
+		return persondtos;
+	}
 	
 }

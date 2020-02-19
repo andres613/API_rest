@@ -11,13 +11,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apicompany.api.dto.PersonDTO;
-import com.apicompany.api.entity.Person;
 import com.apicompany.api.service.PersonService;
 /**
  * Para que Spring reconozca una clase como servicio web y la trate como tal, se debe anotar la clase con << @RestController >>.
@@ -38,7 +38,7 @@ import com.apicompany.api.service.PersonService;
 
 @Validated
 @RestController
-@RequestMapping("/api/person")
+@RequestMapping("/api/")
 public class PersonController {
 	/**
 	 * Se le indica a Spring que debe inyectar una instancia de la clase de lógica de negocio
@@ -50,45 +50,45 @@ public class PersonController {
 	 * Fijarse en la anotación << @RequestBody >> antes de la variable «person». Esta anotación indica que la variable
 	 * debe ser creada con los valores que lleguen en el cuerpo de la petición HTTP,
 	 * para lo cual se usa una estructura JSON
+	 * @throws Exception 
 	 * @throws ParseException 
 	 */
 	// Se le indica el verbo que corresponde al método
-	@PostMapping("/post")
+	
+	@PostMapping
 	public void save(@Valid @RequestBody PersonDTO persondto) throws ParseException {
-		personService.save(persondto);
+		persondto.setId("");
+		personService.save(persondto);	
 	}
-	
-	@GetMapping("/getByPersonid")
-	public PersonDTO getByPerson_id(@Valid @RequestParam String personid) {
-		return personService.findByPersonid(personid);
-	}
-	
 	@GetMapping
-	public List<Person> getAll() {
+	public List<PersonDTO> getAll() {
 		return personService.findAll();
 	}
-	/*
-	@GetMapping("/getByName")
-	public Person getByName(@Valid @RequestParam String name) {
+	
+	@GetMapping("/id")
+	public PersonDTO getById(@Valid @RequestParam String id) {
+		return personService.findById(id);
+	}
+	
+	@GetMapping("/document")
+	public PersonDTO getByPerson_id(@Valid @RequestParam String document) {
+		return personService.findByPersonid(document);
+	}
+	
+	@GetMapping("/name")
+	public List<PersonDTO> getByName(@Valid @RequestParam String name) {
 		return personService.findByName(name);
 	}
 	
-//	@PutMapping("/putById")
-	public void update(@Valid @RequestParam Long id, @Valid @RequestBody Person person) {
-		/*
-		Person oldPerson = personService.findById(id);
-		oldPerson.setName(person.getName());
-		oldPerson.setName(person.getName());
-		oldPerson.setEmail(person.getEmail());
-		oldPerson.setAge(person.getAge());
-		//personService.save(oldPerson);
+	@PutMapping("/put")
+	public void update(@Valid @RequestParam String id, @Valid @RequestBody PersonDTO persondto) throws ParseException {
+		persondto.setId(id);
+		personService.save(persondto);
 	}
 	
-	@DeleteMapping("/deleteById")
-	public void delete(@Valid @RequestParam Long id) {
+	@DeleteMapping("/id")
+	public void delete(@Valid @RequestParam String id) {
 		personService.delete(id);
 	}
-	*/
-	
 
 }

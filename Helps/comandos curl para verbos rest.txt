@@ -14,15 +14,15 @@ en los métodos post, get, put y delete que han sido nombrados con un alias cada
 
 
 Post
-curl --location --request POST 'http://localhost:8080/api_rest/api/person/post' --header 'Content-Type: application/json' --data-raw '{"name":"l","email":"l@l.com","age":12}' | jq
+curl --location --request POST http://localhost:9898/api_rest/api/ --header 'Content-Type: application/json' --data-raw '{"document":"000008","name":"hhh","email":"h@h.com","age":"8"}' | jq
 Get todos
-curl --location --request GET 'http://localhost:8080/api_rest/api/person/' | jq
+curl --location --request GET 'http://localhost:8080/api_rest/api/' | jq
 Get por id
-curl --location --request GET 'http://localhost:8080/api_rest/api/person/getById?id=2' | jq
+curl --location --request GET 'http://localhost:9898/api_rest/api/id?id=1' | jq
 Put
-curl -X PUT -H "Content-Type: application/json" -d '{"name":"b","email":"b@b.com","age":2}' http://localhost:8080/api_rest/api/person/putById?id=2 | jq
+curl -X PUT -H "Content-Type: application/json" -d '{"document":"000007","name":"ggg","email":"g@g.com","age":7}' http://localhost:9898/api_rest/api/put?id=2 | jq
 Delete
-curl -X DELETE -H "Content-Type: application/json" http://localhost:8080/api_rest/api/person/deleteById?id=8 | jq
+curl -X DELETE -H "Content-Type: application/json" http://localhost:9898/api_rest/api/id?id=83 | jq
 
 
 

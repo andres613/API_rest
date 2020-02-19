@@ -1,6 +1,7 @@
 package com.apicompany.api.entity;
 
-//import java.io.Serializable;
+
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -9,11 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -28,14 +24,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name="person")
-public class Person {
+public class Person implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Es buena práctica hacer las entidades serializables. Algunos proveedores de
 	 * persistencia (Hibernate, EclipseLink, etc.) pueden presentar excepciones si
 	 * en algunos casos particulares la entidad no es serializable.
-	 */
-	//private static final long serialVersionUID = 4894729030347835498L;
-	/**
+	 *
+	 *
 	 * La anotación "@Id" indica que este atributo será la clave primaria y
 	 * "@GeneratedValue" indica la forma en que se generarán los valores de la clave
 	 * primaria. En este caso se usará el valor por defecto que hace que se use el
@@ -46,61 +43,45 @@ public class Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // @GeneratedValue solo se activa en caso de usar H2 como BBDD simulada en RAM
 	@Column(name = "id")
-	Long id;
-
-	@NotEmpty(message = "Por favor, ingrese un número de identificación")
-	@Size(min = 6, max = 10, message = "Número de identificación no válido")
-	@Column(name = "personid")
-	String personid;
-
-	@NotEmpty(message = "Por favor, ingrese un nombre")
-	@Size(min = 3, max = 10, message = "Tamaño de nombre incorrecto")
+	String id;
+	@Column(name = "document")
+	String document;
 	@Column(name = "name")
 	String name;
-	
-	@NotEmpty(message = "Por favor, ingrese un correo electrónico")
-	@Email(message = "El formato del e-mail es incorrecto")
-	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
-	message = "El email ingresado no tiene un formato válido")
 	@Column(name = "email")
 	String email;
-
-	@Positive(message = "La edad debe ser mayor a cero (0)")
 	@Column(name = "age")
 	int age;
-
 	@CreationTimestamp
 	@Column(name = "created_at")
 	private Date createdAt;
-
 	@UpdateTimestamp
 	@Column(name = "updated_at")
 	private Date updatedAt;
-
 	
 	public Person() {
 	}
 
-	public Person(Long id, String personid, String name, String email, int age) {
+	public Person(String id, String document, String name, String email, int age) {
 		this.id = id;
-		this.personid = personid;
+		this.document = document;
 		this.name = name;
 		this.email = email;
 		this.age = age;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getPersonId() {
-		return personid;
+	public String getDocument() {
+		return document;
 	}
-	public void setPersonId(String personid) {
-		this.personid = personid;
+	public void setDocument(String document) {
+		this.document = document;
 	}
 
 	public String getName() {
