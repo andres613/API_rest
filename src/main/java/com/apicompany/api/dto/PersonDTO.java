@@ -1,17 +1,25 @@
 package com.apicompany.api.dto;
 
+import java.io.Serializable;
+
 //import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-public class PersonDTO {
+public class PersonDTO implements Serializable {
 	
 	
-	String id;
 	
-	@NotEmpty(message = "Por favor, ingrese un número de identificación")
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1729030843163273091L;
+
+	int id;
+	
+	@NotEmpty(message = "Número de identificación no ingresado o incorrecto")
 	@Size(min = 6, max = 10, message = "Número de identificación no válido")
 	@Pattern(regexp = "^[0-9]*$", message = "Número de identificación no válido; sólo se admiten números")
 	String document;
@@ -29,8 +37,10 @@ public class PersonDTO {
 	/*@NotEmpty(message = "Por favor, ingrese la edad")*/
 	@Positive(message = "La edad debe ser mayor a cero (0)")
 	int age;
+	
+	private int city_id;
 
-	public PersonDTO(String id, String document, String name, String email, int age) {
+	public PersonDTO(int id, String document, String name, String email, int age) {
 		this.id = id;
 		this.document = document;
 		this.name = name;
@@ -38,11 +48,11 @@ public class PersonDTO {
 		this.age = age;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -76,6 +86,14 @@ public class PersonDTO {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public int getCity_id() {
+		return city_id;
+	}
+
+	public void setCity_id(int city_id) {
+		this.city_id = city_id;
 	}
 
 }

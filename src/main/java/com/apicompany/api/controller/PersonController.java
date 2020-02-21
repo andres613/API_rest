@@ -55,24 +55,25 @@ public class PersonController {
 	 */
 	// Se le indica el verbo que corresponde al método
 	
-	@PostMapping
+	@PostMapping("/post")
 	public void save(@Valid @RequestBody PersonDTO persondto) throws ParseException {
-		persondto.setId("");
+		persondto.setId(0);
 		personService.save(persondto);	
 	}
+	
 	@GetMapping
 	public List<PersonDTO> getAll() {
 		return personService.findAll();
 	}
 	
 	@GetMapping("/id")
-	public PersonDTO getById(@Valid @RequestParam String id) {
+	public PersonDTO getById(@Valid @RequestParam int id) {
 		return personService.findById(id);
 	}
 	
 	@GetMapping("/document")
-	public PersonDTO getByPerson_id(@Valid @RequestParam String document) {
-		return personService.findByPersonid(document);
+	public PersonDTO getByDocument(@Valid @RequestParam String document) {
+		return personService.findByDocument(document);
 	}
 	
 	@GetMapping("/name")
@@ -81,13 +82,12 @@ public class PersonController {
 	}
 	
 	@PutMapping("/put")
-	public void update(@Valid @RequestParam String id, @Valid @RequestBody PersonDTO persondto) throws ParseException {
-		persondto.setId(id);
-		personService.save(persondto);
+	public void update(@Valid @RequestParam int id, @Valid @RequestBody PersonDTO persondto) throws ParseException {
+		personService.update(id, persondto);
 	}
 	
 	@DeleteMapping("/id")
-	public void delete(@Valid @RequestParam String id) {
+	public void delete(@Valid @RequestParam int id) {
 		personService.delete(id);
 	}
 
