@@ -36,7 +36,6 @@ public class Person implements Serializable {
 	 * persistencia (Hibernate, EclipseLink, etc.) pueden presentar excepciones si
 	 * en algunos casos particulares la entidad no es serializable.
 	 *
-	 *
 	 * La anotación "@Id" indica que este atributo será la clave primaria y
 	 * "@GeneratedValue" indica la forma en que se generarán los valores de la clave
 	 * primaria. En este caso se usará el valor por defecto que hace que se use el
@@ -69,10 +68,13 @@ public class Person implements Serializable {
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 	
+	/**
+	 * En el atributo city la anotación "@ManyToOne" señala la clave foránea, que en la tabla “person” tendrá el nombre de “city_id” 
+	 * "@JoinColumn(name=”city_id”)"
+	 */
 	@ManyToOne
 	@JsonIgnore // hace que el atributo no se serialice a la hora de generar el JSON.
-	@JoinColumn(name = "city_id", referencedColumnName = "id")
-	//@JoinColumn(name = "city_id", nullable = false, referencedColumnName = "id")
+	@JoinColumn(name = "city_id")//, referencedColumnName = "id", insertable = false, updatable = false)
 	private City city;
 	
 	public Person() {

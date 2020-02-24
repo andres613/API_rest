@@ -10,11 +10,6 @@ import javax.validation.constraints.Size;
 
 public class PersonDTO implements Serializable {
 	
-	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1729030843163273091L;
 
 	int id;
@@ -38,6 +33,8 @@ public class PersonDTO implements Serializable {
 	@Positive(message = "La edad debe ser mayor a cero (0)")
 	int age;
 	
+	String city;
+	
 	private int city_id;
 
 	public PersonDTO(int id, String document, String name, String email, int age) {
@@ -46,6 +43,16 @@ public class PersonDTO implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.age = age;
+	}
+	
+	public PersonDTO(int id, String document, String name, String email, int age, int city_id, String city) {
+		this.id = id;
+		this.document = document;
+		this.name = name;
+		this.email = email;
+		this.age = age;
+		this.city_id = city_id;
+		this.city = city;
 	}
 	
 	public int getId() {
@@ -94,6 +101,14 @@ public class PersonDTO implements Serializable {
 
 	public void setCity_id(int city_id) {
 		this.city_id = city_id;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }

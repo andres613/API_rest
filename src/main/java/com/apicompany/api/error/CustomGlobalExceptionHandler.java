@@ -47,7 +47,6 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("error", "No se ejecutó la operación deseada.");
         body.put("error_type", ex.getLocalizedMessage());
         return new ResponseEntity<Object>(body, HttpStatus.INTERNAL_SERVER_ERROR);
-        //return new ResponseEntity(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
     

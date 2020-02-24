@@ -1,10 +1,11 @@
 package com.apicompany.api.service;
 
 import java.text.ParseException;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import com.apicompany.api.dto.PersonDTO;
 import com.apicompany.api.entity.City;
 import com.apicompany.api.entity.Person;
 import com.apicompany.api.repository.PersonRepository;
+
 
 /**
  * La anotación o estereotipo «@Service» indica a Spring que cree una instancia
@@ -22,8 +24,6 @@ import com.apicompany.api.repository.PersonRepository;
 @Service
 public class PersonService {
 
-	@Autowired
-	private ModelMapper modelMapper;
 	@Autowired
 	private PersonRepository personRepository;
 
@@ -42,13 +42,14 @@ public class PersonService {
 	}
 
 	public List<PersonDTO> findAll() {
-		return listEntityToDto(personRepository.findAll());
+		//return listEntityToDto(personRepository.findAll());
+		return personRepository.findAllDTO();
 	}
-
+	
 	public PersonDTO findById(int id) {
 		return entityToDto(personRepository.findById(id).get());
 	}
-
+	
 	public PersonDTO findByDocument(String document) {
 		return entityToDto(personRepository.findByDocument(document));
 	}
@@ -118,5 +119,18 @@ public class PersonService {
 		}
 		return persondtos;
 	}
-
+	
+	
+	
+	/*
+	public List<PersonDTO> findPeople() {
+		List<Tuple> lt = personRepository.peopleFind();
+		lt.stream().map(tuple->{
+			PersonDTO persondto = NativeResultProcessUtils.processResult(tuple, PersonDTO.class);
+		})
+		
+		
+		return persondto;
+	}
+	*/
 }

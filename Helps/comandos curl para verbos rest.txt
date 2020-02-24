@@ -15,6 +15,7 @@ en los métodos post, get, put y delete que han sido nombrados con un alias cada
 
 Post
 curl --location --request POST http://localhost:9898/api_rest/api/post --header 'Content-Type: application/json' --data-raw '{"document":100001,"name":"aaa","email":"a@a.com","age":1}' | jq
+curl --location --request POST http://localhost:9898/api_rest/api/post --header 'Content-Type: application/json' --data-raw '{"document":1000004,"name":"ddd","email":"d@d.com","age":4,"city_id":"3"}' | jq
 Get todos
 curl --location --request GET 'http://localhost:9898/api_rest/api/' | jq
 Get por id
