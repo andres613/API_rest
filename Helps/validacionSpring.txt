@@ -1,0 +1,12 @@
+https://programandoointentandolo.com/2019/03/crear-un-validador-personalizado-en-spring.html
+https://somospnt.com/blog/47-validaciones-en-java-parte-i
+https://mkyong.com/spring-boot/spring-rest-validation-example/
+https://www.baeldung.com/spring-boot-bean-validation
+https://www.baeldung.com/javax-validation
+https://spring.io/guides/gs/validating-form-input/
+https://mkyong.com/spring-boot/spring-rest-validation-example/
+https://reflectoring.io/bean-validation-with-spring-boot/
+
+
+
+https://inezpre5.wordpress.com/2018/05/07/select-dependientes-con-spring-boot-mysql-y-angularjs/

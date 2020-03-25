@@ -1,0 +1,34 @@
+Para este ejemplo, cabe notar que el archivo de configuracion application.properties está de la siguiente manera:
+
+-------------------||-------------------
+spring.datasource.url=jdbc:mysql://localhost:3306/api_rest
+spring.datasource.username=root
+spring.datasource.password=
+
+spring.application.name=api_rest
+server.servlet.context-path=/api_rest
+-------------------||-------------------
+
+Por lo que se puede observar, se le ha designado un nombre al proyecto (api_rest) que será usado conjuntamente con el endpoint para poder hacer las operaciones
+en los métodos post, get, put y delete que han sido nombrados con un alias cada uno
+
+
+Post
+curl --location --request POST http://localhost:9898/api_rest/api/person/post --header 'Content-Type: application/json' --data-raw '{"document":100001,"name":"aaa","email":"a@a.com","age":1}' | jq
+curl --location --request POST http://localhost:9898/api_rest/api/person/post --header 'Content-Type: application/json' --data-raw '{"document":1000004,"name":"ddd","email":"d@d.com","age":4,"city_id":"3"}' | jq
+Get todos
+curl --location --request GET 'http://localhost:9898/api_rest/api/person/' | jq
+Get por id
+curl --location --request GET 'http://localhost:9898/api_rest/api/person/id?id=1' | jq
+Put
+curl --location --request PUT http://localhost:9898/api_rest/api/person/put?id=3 --header 'Content-Type: application/json' --data-raw '{"document":100004,"name":"ddd","email":"d@d.com","age":4}' | jq
+curl -X PUT -H "Content-Type: application/json" -d '{"document":"000007","name":"ggg","email":"g@g.com","age":7}' http://localhost:9898/api_rest/api/person/put?id=2 | jq
+Delete
+curl -X DELETE -H "Content-Type: application/json" http://localhost:9898/api_rest/api/person/id?id=83 | jq
+
+
+
+
+http://sinbugs.com/como-crear-un-microservicio-o-servicio-web-rest-con-spring-boot-1/
+https://www.javadevjournal.com/spring-boot/spring-boot-rest-example/
+https://www.nigmacode.com/java/Crear-API-REST-con-Spring

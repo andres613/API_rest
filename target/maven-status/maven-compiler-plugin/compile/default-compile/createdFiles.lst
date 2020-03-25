@@ -1,0 +1,11 @@
+com/apicompany/api/controller/PersonController.class
+com/apicompany/api/zconsumeApi/Start.class
+com/apicompany/api/entitydto/Person.class
+com/apicompany/api/repositorydao/PersonRepository.class
+com/apicompany/api/zconsumeApi/Person.class
+com/apicompany/api/zconsumeApi/RequestService.class
+com/apicompany/api/zvalidator/PersonDataValidator.class
+com/apicompany/api/service/PersonService.class
+com/apicompany/api/ApiRestApplication.class
+com/apicompany/api/zvalidator/DataPerson.class
+com/apicompany/api/controller/CustomGlobalExceptionHandler.class
