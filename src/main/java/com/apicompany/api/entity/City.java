@@ -25,7 +25,11 @@ public class City implements Serializable{
 	@Column(name = "id")
 	private int id;
 	
+<<<<<<< HEAD
 	@Column(name = "name", nullable = false, unique = true)
+=======
+	@Column(name = "name")
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 	private String name;
 	
 	/**

@@ -2,21 +2,32 @@ package com.apicompany.api.dto;
 
 import java.io.Serializable;
 
+<<<<<<< HEAD
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+=======
+//import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+<<<<<<< HEAD
 
 public class PersonDTO implements Serializable {
 	
 	
+=======
+public class PersonDTO implements Serializable {
+	
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 	private static final long serialVersionUID = -1729030843163273091L;
 
 	int id;
 	
+<<<<<<< HEAD
 	@NotNull(message = "Número de identificación no ingresado")
 	@NotEmpty(message = "Número de identificación no ingresado")
 	@Size(min = 6, max = 10, message = "Número de identificación no válido. Debe contener al menos seis(6) dígitos")
@@ -36,15 +47,37 @@ public class PersonDTO implements Serializable {
 	String email;
 	
 	@NotNull(message = "Por favor, ingrese la edad")
+=======
+	@NotEmpty(message = "Número de identificación no ingresado o incorrecto")
+	@Size(min = 6, max = 10, message = "Número de identificación no válido")
+	@Pattern(regexp = "^[0-9]*$", message = "Número de identificación no válido; sólo se admiten números")
+	String document;
+	
+	@NotEmpty(message = "Por favor, ingrese un nombre")
+	@Size(min = 3, max = 10, message = "Tamaño de nombre incorrecto")
+	String name;
+	
+	@NotEmpty(message = "Por favor, ingrese un correo electrónico")
+	//@Email(message = "El formato del e-mail es incorrecto")
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
+	message = "El email ingresado no tiene un formato válido")
+	String email;
+	
+	/*@NotEmpty(message = "Por favor, ingrese la edad")*/
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 	@Positive(message = "La edad debe ser mayor a cero (0)")
 	int age;
 	
 	String city;
 	
+<<<<<<< HEAD
 	@Positive(message = "Seleccione una ciudad")
 	private int city_id;
 	
 	public PersonDTO() {}
+=======
+	private int city_id;
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 
 	public PersonDTO(int id, String document, String name, String email, int age) {
 		this.id = id;

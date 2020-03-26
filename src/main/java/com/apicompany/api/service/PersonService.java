@@ -1,11 +1,15 @@
 package com.apicompany.api.service;
 
+<<<<<<< HEAD
 import java.sql.SQLException;
 import java.sql.Timestamp;
+=======
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 import java.text.ParseException;
 
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +23,18 @@ import javax.validation.ValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+=======
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 import org.springframework.stereotype.Service;
 
 import com.apicompany.api.dto.PersonDTO;
 import com.apicompany.api.entity.City;
 import com.apicompany.api.entity.Person;
 import com.apicompany.api.repository.PersonRepository;
+<<<<<<< HEAD
 import com.apicompany.api.response.Response;
 import com.apicompany.api.response.Time;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -33,11 +43,22 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /* La anotación o estereotipo «@Service» indica a Spring que cree una instancia de esta clase (bean) que se podrá usar en otras instancias */
+=======
+
+
+/**
+ * La anotación o estereotipo «@Service» indica a Spring que cree una instancia
+ * de esta clase (bean) que se podrá usar en otras instancias
+ * 
+ * @author debian
+ */
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 @Service
 public class PersonService {
 
 	@Autowired
 	private PersonRepository personRepository;
+<<<<<<< HEAD
 	
 	String data = "";
 
@@ -72,12 +93,33 @@ public class PersonService {
 	
 /////////
 	
+=======
+
+	/**
+	 * Éste método guarda y actualiza, la diferencia estriba en que para el caso de
+	 * guardar, el parámetro "id" que es la llave prinaria, al generarse
+	 * automáticamente, llega nulo. Entre tanto, al actualizar, el campo "id" posee
+	 * un valor y por ende se actualiza la entidad.
+	 * 
+	 * @throws ParseException
+	 */
+
+	public void save(PersonDTO persondto) throws ParseException {
+		Person person = dtoToEntity(persondto);
+		personRepository.save(person);
+	}
+
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 	public List<PersonDTO> findAll() {
 		//return listEntityToDto(personRepository.findAll());
 		return personRepository.findAllDTO();
 	}
 	
+<<<<<<< HEAD
 	public PersonDTO findById (int id) {
+=======
+	public PersonDTO findById(int id) {
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 		return entityToDto(personRepository.findById(id).get());
 	}
 	
@@ -85,6 +127,7 @@ public class PersonService {
 		return entityToDto(personRepository.findByDocument(document));
 	}
 
+<<<<<<< HEAD
 	public List<PersonDTO> searchByDocument(String document) {
 		return personRepository.searchByDocument(document);
 	}
@@ -111,6 +154,12 @@ public class PersonService {
 
 /////////
 	
+=======
+	public List<PersonDTO> findByName(String name) {
+		return listEntityToDto(personRepository.findByName(name));
+	}
+
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 	public void update(int id, PersonDTO persondto) {
 		if (findById(id).getId() != 0) {// Busca que el campo con ese id no se encuentre vacío
 			Person person = personRepository.findById(id).get();
@@ -123,6 +172,7 @@ public class PersonService {
 		}
 	}
 
+<<<<<<< HEAD
 /////////
 	
 	public ResponseEntity<Response> delete(int id) throws JsonMappingException, JsonProcessingException {
@@ -141,6 +191,15 @@ public class PersonService {
 //////////////////////////////////////////////////////////
 // dtoToEntity, entityToDto and listEntityToDto methods //
 //////////////////////////////////////////////////////////
+=======
+	public void delete(int id) {
+		personRepository.deleteById(id);
+	}
+
+	//////////////////////////////////////////////////////////
+	// dtoToEntity, entityToDto and listEntityToDto methods //
+	//////////////////////////////////////////////////////////
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 
 	private Person dtoToEntity(PersonDTO persondto) throws ParseException {
 		if (persondto != null) {
@@ -185,6 +244,7 @@ public class PersonService {
 	}
 	
 	
+<<<<<<< HEAD
 //////////////
 // Response //
 //////////////
@@ -237,4 +297,18 @@ public class PersonService {
 	}
 
 	
+=======
+	
+	/*
+	public List<PersonDTO> findPeople() {
+		List<Tuple> lt = personRepository.peopleFind();
+		lt.stream().map(tuple->{
+			PersonDTO persondto = NativeResultProcessUtils.processResult(tuple, PersonDTO.class);
+		})
+		
+		
+		return persondto;
+	}
+	*/
+>>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 }
