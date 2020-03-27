@@ -79,10 +79,7 @@
 			<artifactId>modelmapper</artifactId>
 			<version>2.3.5</version>
 		</dependency>
-<<<<<<< HEAD
-		
-=======
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
+
 	</dependencies>
 	
 	<build>

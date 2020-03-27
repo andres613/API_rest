@@ -7,7 +7,7 @@
     
     </br>
 
-    <div for = 'operation'>
+    <div for = 'inOperation'>
 
       <div>
         <input type = "button" value = "Crear"     v-on:click = 'create()' :disabled = 'isDisabled'/>
@@ -18,36 +18,36 @@
       
       <div>
 
-          <h3 v-if = 'this.butt == "search"' >Ingrese un número de documento para la búsqueda:</h3>
-          <span v-show = 'this.butt == "create" || this.butt == "update" || this.butt == "search"'>
+          <h3 v-if = 'this.operation == "search"' >Ingrese un número de documento para la búsqueda:</h3>
+          <span v-show = 'this.operation == "create" || this.operation == "update" || this.operation == "search"'>
             <label> Identificación <input type = "text" id = "dni" placeholder = "Identificación" v-model = "dni"/> </label>
           </span>
 
-          <span v-show = 'this.butt == "create" || this.butt == "update"'>
+          <span v-show = 'this.operation == "create" || this.operation == "update"'>
             <label> Nombre <input type = "text" id = "name"  placeholder = "Nombre"/> </label>
             <label> Email  <input type = "text" id = "email" placeholder = "E-mail"/> </label>
             <label> Edad   <input type = "text" id = "age"   placeholder = "Edad"/> </label>
           </span>
 
-          <span v-show = 'this.butt == "create" || this.butt == "search" || this.butt == "update"'>
+          <span v-show = 'this.operation == "create" || this.operation == "search" || this.operation == "update"'>
             <label> Ciudad
               <select id = "cities" v-model = "citieSelected" >
-                <option value = "" selected = "selected" > {{ (this.butt == "search") ? "Todos" : "Select a city ..." }} </option>
+                <option value = "" selected = "selected" > {{ (this.operation == "search") ? "Todos" : "Select a city ..." }} </option>
                 <option v-for = "c in respCity"> {{ c.name }} </option>
               </select>
             </label>
           </span>
 
-          <h3 v-show = 'this.butt == "search"'> {{ !dni.length ? msgDni : "" }} </h3>
+          <h3 v-show = 'this.operation == "search"'> {{ (!dni.length) ? msgDni : answer }} </h3>
 
       </div>
 
     </div>
 
-    <p id = "answer" v-show = 'this.butt == "create" || this.butt == "remove"'> {{ answer }} </p>
+    <p id = "answer" v-show = 'this.operation == "create" || this.operation == "remove"'> {{ answer }} </p>
     <p>
-      <input type = "button" v-bind:value = "seUp" v-show = 'this.butt == "create" || this.butt == "update"' @click = 'send()'/>
-      <input type = "button" value = "Cancelar"    v-show = 'this.butt == "create" || this.butt == "search" || this.butt == "update"' v-on:click = 'cancel()'/>
+      <input type = "button" v-bind:value = "seUp" v-show = 'this.operation == "create" || this.operation == "update"' @click = 'send()'/>
+      <input type = "button" value = "Cancelar"    v-show = 'this.operation == "create" || this.operation == "search" || this.operation == "update"' v-on:click = 'cancel()'/>
     </p>
 
 
@@ -96,11 +96,11 @@ export default {
   
   data () {
     return {
-      operation: false,
+      inOperation: false,
       registry: "",
       data: "",
       seUp: "Enviar",
-      butt: "",
+      operation: "search",
       dni: "",
       citieSelected: '',
       indexCity: "",
@@ -119,30 +119,43 @@ export default {
 
   computed: {
   	isDisabled: function(){
-    	return this.operation;
+    	return this.inOperation;
     }
   },
 
   watch: {
     
     dni (newVal, oldVal) {
-      if(this.butt == "search") {
+      if(this.operation == "search") {
         fetch(this.urlPerson+`get?cityName=${document.getElementById("cities").value}&document=${this.dni}`)
-          .then (response => { return response.json() })
-          .then (dataPerson => {
-            this.respPerson = dataPerson
-          })
-        //this.clean()
+          .then(res => { return res.text() })
+          .catch(error => console.error('Error:', error))
+          .then(response => {
+            this.respPerson = JSON.parse(response).peopleDTO;
+            if(this.respPerson.length == 0) {
+              this.answer = JSON.parse(response).data
+            } else {
+              this.answer = ""
+            }
+          });
+          //this.clean()
       }
     },
 
     citieSelected (newVal, oldVal) {
-      if(this.butt == "search") {
+      if(this.operation == "search") {
         fetch(this.urlPerson+`get?cityName=${document.getElementById("cities").value}&document=${this.dni}`)
-          .then(response => { return response.json() })
-          .then(dataPerson => {
-            this.respPerson = dataPerson
-          })
+          .then(res => { return res.text() })
+          .catch(error => console.error('Error:', error))
+          .then(response => {
+            this.respPerson = JSON.parse(response).peopleDTO;
+            if(this.respPerson.length == 0) {
+              this.answer = JSON.parse(response).data
+            } else {
+              this.answer = ""
+            }
+          });
+          //this.clean()
       }
     }
     
@@ -152,8 +165,8 @@ export default {
 
     cancel() {
       this.dni = "";
-      this.butt = "cancel"
-      this.operation = false
+      this.operation = "cancel"
+      this.inOperation = false
       this.answer = "";
       this.clean ()
     },
@@ -184,9 +197,9 @@ export default {
     },
 
     create() {
-      this.operation = true
+      this.inOperation = true
       this.seUp = "Enviar"
-      this.butt = "create"
+      this.operation = "create"
       this.dni = ""
       this.clean()
     },
@@ -221,15 +234,15 @@ export default {
     },
 
     search() {
-      this.operation = true
-      this.butt = "search"
+      this.inOperation = true
+      this.operation = "search"
       //this.dni = "";this.clean ()
     },
 
     update(event) {
-      this.operation = true
+      this.inOperation = true
       this.seUp = "Actualizar"
-      this.butt = "update"
+      this.operation = "update"
       let registry = event.target.parentNode.parentNode.parentNode.getElementsByTagName('td')
       let i = this.respCity.findIndex (ciudad => ciudad.name === registry[5].innerHTML.trim())
       this.getRegistry (registry, i, function(registry, i) {
@@ -257,7 +270,7 @@ export default {
           .then(response => {
             this.answer = JSON.parse(response);
             this.answer = this.answer.data.value
-            this.butt = "remove"
+            this.operation = "remove"
             this.dni = "";
             this.clean ()
           });

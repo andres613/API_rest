@@ -14,7 +14,6 @@ en los métodos post, get, put y delete que han sido nombrados con un alias cada
 
 
 Post
-<<<<<<< HEAD
 curl --location --request POST http://localhost:9898/api_rest/api/person/post --header 'Content-Type: application/json' --data-raw '{"document":100001,"name":"aaa","email":"a@a.com","age":1}' | jq
 curl --location --request POST http://localhost:9898/api_rest/api/person/post --header 'Content-Type: application/json' --data-raw '{"document":1000004,"name":"ddd","email":"d@d.com","age":4,"city_id":"3"}' | jq
 Get todos
@@ -26,7 +25,6 @@ curl --location --request PUT http://localhost:9898/api_rest/api/person/put?id=3
 curl -X PUT -H "Content-Type: application/json" -d '{"document":"000007","name":"ggg","email":"g@g.com","age":7}' http://localhost:9898/api_rest/api/person/put?id=2 | jq
 Delete
 curl -X DELETE -H "Content-Type: application/json" http://localhost:9898/api_rest/api/person/id?id=83 | jq
-=======
 curl --location --request POST http://localhost:9898/api_rest/api/post --header 'Content-Type: application/json' --data-raw '{"document":100001,"name":"aaa","email":"a@a.com","age":1}' | jq
 curl --location --request POST http://localhost:9898/api_rest/api/post --header 'Content-Type: application/json' --data-raw '{"document":1000004,"name":"ddd","email":"d@d.com","age":4,"city_id":"3"}' | jq
 Get todos
@@ -38,8 +36,6 @@ curl --location --request PUT http://localhost:9898/api_rest/api/put?id=3 --head
 curl -X PUT -H "Content-Type: application/json" -d '{"document":"000007","name":"ggg","email":"g@g.com","age":7}' http://localhost:9898/api_rest/api/put?id=2 | jq
 Delete
 curl -X DELETE -H "Content-Type: application/json" http://localhost:9898/api_rest/api/id?id=83 | jq
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
-
 
 
 

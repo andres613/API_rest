@@ -1,6 +1,5 @@
 package com.apicompany.api.dto;
 
-<<<<<<< HEAD
 import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;
@@ -39,8 +38,3 @@ public class CityDTO implements Serializable {
 	}
 
 }
-=======
-public class CityDTO {
-	
-}
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2

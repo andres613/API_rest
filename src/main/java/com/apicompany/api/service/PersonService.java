@@ -1,15 +1,11 @@
 package com.apicompany.api.service;
 
-<<<<<<< HEAD
 import java.sql.SQLException;
 import java.sql.Timestamp;
-=======
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 import java.text.ParseException;
 
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,18 +19,12 @@ import javax.validation.ValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-=======
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 import org.springframework.stereotype.Service;
 
 import com.apicompany.api.dto.PersonDTO;
 import com.apicompany.api.entity.City;
 import com.apicompany.api.entity.Person;
 import com.apicompany.api.repository.PersonRepository;
-<<<<<<< HEAD
 import com.apicompany.api.response.Response;
 import com.apicompany.api.response.Time;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -43,34 +33,22 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /* La anotación o estereotipo «@Service» indica a Spring que cree una instancia de esta clase (bean) que se podrá usar en otras instancias */
-=======
-
-
-/**
- * La anotación o estereotipo «@Service» indica a Spring que cree una instancia
- * de esta clase (bean) que se podrá usar en otras instancias
- * 
- * @author debian
- */
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 @Service
 public class PersonService {
 
 	@Autowired
 	private PersonRepository personRepository;
-<<<<<<< HEAD
 	
 	String data = "";
-
-	/* Éste método guarda y actualiza, la diferencia estriba en que para el caso de guardar, el parámetro "id" que es la llave primaria, al generarse
-	 * automáticamente, llega nulo. Entre tanto, al actualizar, el campo "id" posee
-	 * un valor y por ende se actualiza la entidad.*/
 	
 	/** @throws ParseException	
 	 * @throws SQLException 
 	 * @throws JsonProcessingException */
 	
 /////////
+	/* Éste método guarda y actualiza, la diferencia estriba en que para el caso de guardar, el parámetro "id" que es la llave primaria, al generarse
+	 * automáticamente, llega nulo. Entre tanto, al actualizar, el campo "id" posee
+	 * un valor y por ende se actualiza la entidad.*/
 	
 	public ResponseEntity<Response> save(PersonDTO persondto) throws ParseException, SQLException, JsonProcessingException, ClassNotFoundException {
 		ResponseEntity<Response> re = validator(persondto);
@@ -92,87 +70,67 @@ public class PersonService {
 	}
 	
 /////////
-	
-=======
 
-	/**
-	 * Éste método guarda y actualiza, la diferencia estriba en que para el caso de
-	 * guardar, el parámetro "id" que es la llave prinaria, al generarse
-	 * automáticamente, llega nulo. Entre tanto, al actualizar, el campo "id" posee
-	 * un valor y por ende se actualiza la entidad.
-	 * 
-	 * @throws ParseException
-	 */
-
-	public void save(PersonDTO persondto) throws ParseException {
-		Person person = dtoToEntity(persondto);
-		personRepository.save(person);
-	}
-
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 	public List<PersonDTO> findAll() {
 		//return listEntityToDto(personRepository.findAll());
 		return personRepository.findAllDTO();
 	}
 	
-<<<<<<< HEAD
-	public PersonDTO findById (int id) {
-=======
 	public PersonDTO findById(int id) {
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 		return entityToDto(personRepository.findById(id).get());
 	}
 	
 	public PersonDTO findByDocument(String document) {
 		return entityToDto(personRepository.findByDocument(document));
 	}
-
-<<<<<<< HEAD
-	public List<PersonDTO> searchByDocument(String document) {
-		return personRepository.searchByDocument(document);
-	}
-	
-	public List<PersonDTO> findByName(String name) {
+		
+	public List<PersonDTO> findListByName(String name) {
 		return listEntityToDto(personRepository.findByName(name));
 	}
 	
-	public List<PersonDTO> searchByCity(String cityName) {
+	public List<PersonDTO> findListByDocument(String document) {
+		return personRepository.searchByDocument(document);
+	}
+	
+	public List<PersonDTO> findListByCity(String cityName) {
 		return personRepository.searchByCity(cityName);
 	}
 	
-	public List<PersonDTO> searchByCityAndDocument(String cityName, String document) {
-		if(cityName == "") {
-			return searchByDocument(document);
+	public ResponseEntity<Response> searchByCityAndDocument(String cityName, String document) throws JsonMappingException, JsonProcessingException {
+		PersonDTO persondto = new PersonDTO(0,document,"","",0,0,cityName);
+		return responseEnt("search", persondto);
+	}
+
+	private List<PersonDTO> search(PersonDTO persondto) {
+		String cityName = persondto.getCity();
+		String document = persondto.getDocument();
+		if (cityName == "") {
+			return findListByDocument(document);
 		} else {
-			if(document == "") {
-				return searchByCity(cityName);
+			if (document == "") {
+				return findListByCity(cityName);
 			} else {
 				return personRepository.findByDocumentAndCity(cityName, document);
 			}
 		}
 	}
-
+	
+	
+	
+	
+	
+	
+	
 /////////
 	
-=======
-	public List<PersonDTO> findByName(String name) {
-		return listEntityToDto(personRepository.findByName(name));
-	}
-
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
-	public void update(int id, PersonDTO persondto) {
+	public void update(int id, PersonDTO persondto) throws ParseException {
 		if (findById(id).getId() != 0) {// Busca que el campo con ese id no se encuentre vacío
-			Person person = personRepository.findById(id).get();
-			person.setId(id);
-			person.setDocument(persondto.getDocument());
-			person.setName(persondto.getName());
-			person.setEmail(persondto.getEmail());
-			person.setAge(persondto.getAge());
+			persondto.setId(id);
+			Person person = dtoToEntity(persondto);
 			personRepository.save(person);
 		}
 	}
 
-<<<<<<< HEAD
 /////////
 	
 	public ResponseEntity<Response> delete(int id) throws JsonMappingException, JsonProcessingException {
@@ -191,15 +149,6 @@ public class PersonService {
 //////////////////////////////////////////////////////////
 // dtoToEntity, entityToDto and listEntityToDto methods //
 //////////////////////////////////////////////////////////
-=======
-	public void delete(int id) {
-		personRepository.deleteById(id);
-	}
-
-	//////////////////////////////////////////////////////////
-	// dtoToEntity, entityToDto and listEntityToDto methods //
-	//////////////////////////////////////////////////////////
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 
 	private Person dtoToEntity(PersonDTO persondto) throws ParseException {
 		if (persondto != null) {
@@ -244,16 +193,36 @@ public class PersonService {
 	}
 	
 	
-<<<<<<< HEAD
 //////////////
 // Response //
 //////////////
 
 	private ResponseEntity<Response> responseEnt (String opt, PersonDTO persondto) throws JsonMappingException, JsonProcessingException {
+		JsonNode jn = null;
+		ObjectMapper mapper = new ObjectMapper();
 		switch (opt) {
+		case "search":
+			if (persondto.getCity() == "" && persondto.getDocument() == "") {
+				List<PersonDTO> peopledto = findAll();
+				if (peopledto.isEmpty()) {
+					jn = mapper.readTree("{\"value\":\"Recurso no encontrado!!\"}");
+					return echoSaveList (Time.getTime(), jn, 404, "Not Found", peopledto);
+				} else {
+					jn = mapper.readTree("{\"value\":\"Operación realizada satisfactoriamente!!\"}");
+					return echoSaveList (Time.getTime(), jn, 200, "OK", peopledto);					
+				}
+			} else {
+				List<PersonDTO> peopledto = search(persondto);
+				if (peopledto.isEmpty()) {
+					jn = mapper.readTree("{\"value\":\"Recurso no encontrado!!\"}");
+					return echoSaveList (Time.getTime(), jn, 404, "Not Found", peopledto);
+				} else {
+					jn = mapper.readTree("{\"value\":\"Operación realizada satisfactoriamente!!\"}");
+					return echoSaveList (Time.getTime(), jn, 200, "OK", peopledto);
+				}
+			}
+			
 		case "delete":
-			ObjectMapper mapper = new ObjectMapper();
-			JsonNode jn = null;
 			jn = mapper.readTree("{\"value\":\"Registro con DNI "+persondto.getDocument()+" eliminado satisfactoriamente!!\"}");
 			return echoSave(Time.getTime(), jn, 200, "OK", persondto);
 		default:
@@ -261,12 +230,19 @@ public class PersonService {
 		}
 	}
 	
+	
+	
 	private ResponseEntity<Response> echoSave (Timestamp timestamp, JsonNode data, int respondeCode, String status, PersonDTO persondto) {
 		Response response;
 		response = new Response(timestamp, data, respondeCode, status, persondto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
+	private ResponseEntity<Response> echoSaveList (Timestamp timestamp, JsonNode data, int respondeCode, String status, List<PersonDTO> peopledto) {
+		Response response;
+		response = new Response(timestamp, data, respondeCode, status, peopledto);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 	
 /////////////////
 // Validations //
@@ -297,18 +273,4 @@ public class PersonService {
 	}
 
 	
-=======
-	
-	/*
-	public List<PersonDTO> findPeople() {
-		List<Tuple> lt = personRepository.peopleFind();
-		lt.stream().map(tuple->{
-			PersonDTO persondto = NativeResultProcessUtils.processResult(tuple, PersonDTO.class);
-		})
-		
-		
-		return persondto;
-	}
-	*/
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2
 }

@@ -1,6 +1,7 @@
 package com.apicompany.api.response;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.apicompany.api.dto.PersonDTO;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -12,6 +13,7 @@ public class Response {
 	private int responseCode;
 	private String status;
 	private PersonDTO persondto;
+	List<PersonDTO> peopledto;
 	
 	//Getters
 	public Timestamp getTimestamp() {
@@ -28,6 +30,9 @@ public class Response {
 	}
 	public PersonDTO getPersonDTO() {
 		return persondto;
+	}
+	public List<PersonDTO> getPeopleDTO() {
+		return peopledto;
 	}
 	
 	//Setters
@@ -55,6 +60,14 @@ public class Response {
 		this.responseCode = responseCode;
 		this.status = status;
 		this.persondto = persondto;
+	}
+	
+	public Response(Timestamp timestamp, JsonNode data, int responseCode, String status, List<PersonDTO> peopledto) {
+		this.timestamp = timestamp;
+		this.data = data;
+		this.responseCode = responseCode;
+		this.status = status;
+		this.peopledto = peopledto;
 	}
 
 }

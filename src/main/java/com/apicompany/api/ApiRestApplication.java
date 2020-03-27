@@ -12,7 +12,6 @@ public class ApiRestApplication {
 
 }
 
-<<<<<<< HEAD
 /* Ésta es la clase de inicia de la aplicación.
  * Luego, una vez iniciada la aplicación, la clase ClaseController queda atenta a cualquier evento y
  * es quien escucha las peticiones para cada uno de los verbos manejados. Ésta clase, emplea a ClaseDTO para capturar la informacion, filtrarla o validarla
@@ -21,7 +20,6 @@ public class ApiRestApplication {
  * y ser expuestos al usuario.
  * 
  * La clase CustomGlobalExceptionHandler administra errores y lanza los mensajes correspondientes a la excepcion ocurrida. */
-=======
 /**
  * Ésta es la clase de inicio de la aplicación.
  * Luego, una vez iniciada la aplicación, la clase ClaseController queda atenta a cualquier evento y
@@ -32,4 +30,3 @@ public class ApiRestApplication {
  * 
  * La clase CustomGlobalExceptionHandler administra errores y lanza los mensajes correspondientes a la excepcion ocurrida. 
  */
->>>>>>> 6cf6953b0de66567209c4d20605d700dc51bcec2

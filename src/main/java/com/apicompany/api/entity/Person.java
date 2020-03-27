@@ -136,7 +136,7 @@ public class Person implements Serializable {
 	public void setupdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+		
 	@JsonIgnore
 	public City getCity() {
 		return city;
